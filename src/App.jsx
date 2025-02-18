@@ -29,6 +29,7 @@ const App = () => {
             <Plant />
             <Power />
             <Bank />
+            <Footer />
           </>} />
           <Route path="/loan-calculator" element={<LoanCalculator />} />
           <Route path="/aster" element={<Aster />}></Route>
@@ -36,7 +37,6 @@ const App = () => {
           <Route path="/details" element={<Details />} />
           <Route path="/form" element={<Form />} />
         </Routes>
-        <Footer />
       </Router>
     </>
   );

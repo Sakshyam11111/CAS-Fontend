@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-50 shadow-md" data-aos="fade-down">
+    <nav className="sticky top-0 left-0 z-10 bg-gray-50 shadow-md" data-aos="fade-down">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <h1 className="text-xl font-bold text-gray-800">Cas Bank</h1>
 

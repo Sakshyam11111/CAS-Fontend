@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { CiSearch } from "react-icons/ci";
 import { IoIosArrowBack } from "react-icons/io";
 import { FaEye } from "react-icons/fa";
-import { IoMdExit, IoMdMore } from "react-icons/io"; 
+import { IoMdExit, IoMdMore } from "react-icons/io";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 import AOS from 'aos';
@@ -62,8 +62,40 @@ const LC = () => {
     };
 
     const openDetailsPage = (doc) => {
-        navigate('/details', { state: { document: doc } }); 
+        navigate('/details', { state: { document: doc } });
     };
+
+    const[lcData, setLcData] = useState([]);
+
+    // Fetch LC data on component mount
+    useEffect(() => {
+        const fetchLCData = async () => {
+            const fetch_lc_url = `http://192.168.10.3:8001/api/resource/Letter of Credit?fields=["*"]&order_by=creation desc`;
+
+            try {
+                const response = await fetch(fetch_lc_url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'f22c7e0d8ad50b0:5bb29f1008f8d7b',
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const responseData = await response.json();
+   
+                setLcData(responseData.data)
+            } catch (err) {
+                console.log('Error: ', err);
+            }
+        };
+
+        fetchLCData();
+    },[]);
+
+    useEffect(() => {
+        console.log("The received lc data: ",lcData);
+    },[lcData])
+
 
     return (
         <div className="flex flex-col md:flex-row p-5 bg-gray-50" data-aos="fade-up">
@@ -155,7 +187,7 @@ const LC = () => {
                             />
                             <CiSearch className="absolute right-3 top-3 text-gray-500" />
                         </div>
-                        <button 
+                        <button
                             className="bg-green-600 text-white rounded-lg px-4 py-2 hover:bg-green-700 transition duration-200 flex items-center"
                             onClick={() => navigate('/form')}
                         >
@@ -177,14 +209,14 @@ const LC = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredDocuments.map((doc, index) => (
+                            {lcData.map((doc, index) => (
                                 <tr key={index} className="hover:bg-gray-50">
                                     <td className="border border-gray-300 p-2">{doc.sn}</td>
-                                    <td className="border border-gray-300 p-2">{doc.name}</td>
-                                    <td className="border border-gray-300 p-2">{doc.id}</td>
-                                    <td className="border border-gray-300 p-2">{doc.date}</td>
+                                    <td className="border border-gray-300 p-2">{doc.applicant_name}</td>
+                                    <td className="border border-gray-300 p-2">{doc.applicant_phone}</td>
+                                    <td className="border border-gray-300 p-2">{doc.modified}</td>
                                     <td className="border border-gray-300 p-2 flex justify-center items-center">
-                                        <button 
+                                        <button
                                             className="flex items-center bg-[#3C3F4D] text-white rounded p-2 hover:bg-[#2C2F3D] transition duration-200"
                                             onClick={() => openDetailsPage(doc)} // Navigate to details page
                                         >
