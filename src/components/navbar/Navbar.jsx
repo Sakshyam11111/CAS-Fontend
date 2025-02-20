@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 left-0 z-10 bg-gray-50 shadow-md" data-aos="fade-down">
+    <nav className="bg-gray-50 shadow-md" data-aos="fade-down">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <h1 className="text-xl font-bold text-gray-800">Cas Bank</h1>
 
@@ -53,7 +53,7 @@ const Navbar = () => {
                 type="text"
                 placeholder="Search"
                 className="border border-gray-300 rounded-full py-1 px-4 ml-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-                onBlur={() => setIsSearchVisible(false)} 
+                onBlur={() => setIsSearchVisible(false)}
               />
             )}
           </div>

@@ -1300,13 +1300,6 @@ Details.propTypes = {
         exim_code: PropTypes.string,
         pan_no: PropTypes.string,
 
-        LCdetailsPercentage: PropTypes.string,
-        LCdetailsIncoterms: PropTypes.string,
-        LCdetailsCurrency: PropTypes.string,
-        LCdetailsDeliveryTerm: PropTypes.string,
-        LCdetailsAmount: PropTypes.string,
-        LCdetailsNamePlaced: PropTypes.string,
-        LCdetailsTolerance: PropTypes.string,
         form_of_documentary_credit: PropTypes.string,
         date_of_issue: PropTypes.string,
         applicable_rules: PropTypes.string,
@@ -1320,6 +1313,7 @@ Details.propTypes = {
         tolerance_negative: PropTypes.string,
         add_amount_covered: PropTypes.number,
         ref_to_pre_advice: PropTypes.string,
+        transferable_lc: PropTypes.string,
 
         credit_bank_name: PropTypes.string,
         credit_swift_code: PropTypes.string,

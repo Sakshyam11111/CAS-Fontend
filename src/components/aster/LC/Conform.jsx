@@ -13,7 +13,7 @@ const Conform = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => 
 
     return (
         <div className="p-4 md:p-8 bg-gray-50 min-h-screen flex flex-col">
-            <div className="sticky top-16 left-0 bg-white z-10 shadow-md">
+            <div className="bg-white z-10 shadow-md">
                 <div className="flex items-center p-4">
                     <button
                         onClick={() => decreaseFormStep(0)}
@@ -27,7 +27,7 @@ const Conform = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => 
 
             <div className="flex flex-col md:flex-row mt-4">
                 <div className="w-full md:w-1/4 mb-4 md:mr-8" data-aos="fade-right">
-                    <div className='sticky top-48 left-0'>
+                    <div className='sticky top-0 left-0'>
                         <h3 className="text-lg font-semibold mb-4">Steps</h3>
                         <div className="mb-5">
                             <div className="flex items-center">
@@ -165,8 +165,8 @@ const Conform = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => 
                                     <label className="block text-gray-700 mb-2">Bank Name</label>
                                     <input
                                         type="text"
-                                        name="advisingBankName"
-                                        value={data.advisingBankName}
+                                        name="bank_name"
+                                        value={data.bank_name}
                                         onChange={handleChange}
                                         className="border border-gray-300 rounded-lg p-3 w-full"
                                     />
@@ -175,8 +175,8 @@ const Conform = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => 
                                     <label className="block text-gray-700 mb-2">SWIFT Code</label>
                                     <input
                                         type="number"
-                                        name="advisingSWIFT"
-                                        value={data.advisingSWIFT}
+                                        name="advising_swift_code"
+                                        value={data.advising_swift_code}
                                         onChange={handleChange}
                                         className="border border-gray-300 rounded-lg p-3 w-full"
                                     />
@@ -226,8 +226,8 @@ const Conform = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => 
                                 <div>
                                     <label className="block text-gray-700 mb-2">Advising Banks Charges</label>
                                     <select
-                                        name="advisingBankschargesifany"
-                                        value={data.advisingBankschargesifany}
+                                        name="advising_bank_charges"
+                                        value={data.advising_bank_charges}
                                         onChange={handleChange}
                                         className="border border-gray-300 rounded-lg p-3 w-full"
                                     >
@@ -292,12 +292,9 @@ Conform.propTypes = {
         confirming_swift_code: PropTypes.string,
         confirmation_charges: PropTypes.string,
         other_charges_outside_country: PropTypes.string,
-        advisingBankName: PropTypes.string,
-        advisingSWIFT: PropTypes.string,
-        advising_bank_charges: PropTypes.string,
         bank_name: PropTypes.string,
         advising_swift_code: PropTypes.string,
-        advisingBankschargesifany: PropTypes.string,
+        advising_bank_charges: PropTypes.string,
         direct_reimbursement: PropTypes.string,
     }),
     handleChange: PropTypes.func,

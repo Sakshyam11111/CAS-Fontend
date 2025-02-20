@@ -13,7 +13,7 @@ const Bene = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => {
 
     return (
         <div className="p-4 md:p-8 bg-gray-50 min-h-screen flex flex-col">
-            <div className="sticky top-16 left-0 bg-white z-10 shadow-md">
+            <div className="bg-white z-10 shadow-md">
                 <div className="flex items-center p-4">
                     <button
                         onClick={() => decreaseFormStep(0)}
@@ -27,7 +27,7 @@ const Bene = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => {
 
             <div className="flex flex-col md:flex-row mt-4">
                 <div className="w-full md:w-1/4 mb-4 md:mr-8" data-aos="fade-right">
-                    <div className='sticky top-48 left-0'>
+                    <div className='sticky top-0 left-0'>
                         <h3 className="text-lg font-semibold mb-4">Steps</h3>
                         <div className="mb-0">
                             <div className="flex items-center">

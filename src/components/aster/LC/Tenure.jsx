@@ -13,7 +13,7 @@ const Tenure = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => {
 
     return (
         <div className="p-4 md:p-8 bg-gray-50 min-h-screen flex flex-col">
-            <div className="sticky top-16 left-0 bg-white z-10 shadow-md">
+            <div className="bg-white z-10 shadow-md">
                 <div className="flex items-center p-4">
                     <button
                         onClick={() => decreaseFormStep(2)}
@@ -78,7 +78,7 @@ const Tenure = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => {
                                 <IoCheckmarkCircleOutline className="ml-4 text-2xl text-green-600" />
                             </div>
                             <div className="border-l-2 border-gray-300 h-10" />
-                        </div>  
+                        </div>
                         <div className="mb-5">
                             <div className="flex items-center">
                                 <div className="w-8 h-8 rounded-full bg-gray-800 text-white flex items-center justify-center">5</div>
@@ -232,7 +232,7 @@ const Tenure = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => {
                                 <div>
                                     <label className="block text-gray-700 mb-2">Shipment Period</label>
                                     <input
-                                        type="text"
+                                        type="date"
                                         name="credit_shipment_period"
                                         value={data.credit_shipment_period}
                                         onChange={handleChange}
@@ -350,7 +350,7 @@ const Tenure = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => {
                                         <input
                                             type="radio"
                                             id={option.toLowerCase()}
-                                            name="partial_shipment_section" 
+                                            name="partial_shipment_section"
                                             value={option}
                                             onChange={handleChange}
                                             className="h-5 w-5 text-green-600 border-gray-300 rounded focus:ring-green-500"

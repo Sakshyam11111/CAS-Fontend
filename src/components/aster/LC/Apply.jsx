@@ -60,7 +60,7 @@ const Apply = ({ data, handleChange, increaseFormStep }) => {
                 </div>
             ) : (
                 <>
-                    <div className="sticky top-16 left-0 bg-white z-10 shadow-md">
+                    <div className="bg-white z-10 shadow-md">
                         <div className="flex items-center p-4">
                             <button
                                 onClick={() => navigate('/lc')}
@@ -77,8 +77,8 @@ const Apply = ({ data, handleChange, increaseFormStep }) => {
                     </div>
 
                     <div className="flex flex-grow mt-4 flex-col md:flex-row">
-                        <div className="hidden md:block w-1/4 mr-8" data-aos="fade-down">
-                            <div className='sticky top-48 left-0'>
+                        <div className="hidden md:block w-1/4 mr-8">
+                            <div className='sticky top-0 left-0'>
                                 <h3 className="text-lg font-semibold mb-4">Steps</h3>
                                 <div className="mb-4">
                                     <div className="flex items-center">
@@ -159,7 +159,7 @@ const Apply = ({ data, handleChange, increaseFormStep }) => {
                                                 onChange={handleChange}
                                                 className="border border-gray-300 rounded-lg p-3 w-full"
                                                 placeholder=""
-                                            
+
                                             />
                                         </div>
                                         <div>
@@ -220,7 +220,7 @@ const Apply = ({ data, handleChange, increaseFormStep }) => {
                                         <div>
                                             <h1>Exim Code</h1>
                                             <input
-                                                type="number"
+                                                type="text"
                                                 name="applicant_exim_code"
                                                 value={data.applicant_exim_code}
                                                 onChange={handleChange}
@@ -282,7 +282,7 @@ Apply.propTypes = {
         applicant_name: PropTypes.string,
         applicant_email: PropTypes.string,
         applicant_address: PropTypes.string,
-        applicant_phone_no: PropTypes.string,
+        applicant_phone_no: PropTypes.number,
         applicant_postal_code: PropTypes.string,
         applicant_country: PropTypes.string,
         account_number: PropTypes.string,

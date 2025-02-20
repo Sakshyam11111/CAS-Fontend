@@ -16,7 +16,7 @@ const LCDetails = ({ data, handleChange, increaseFormStep, decreaseFormStep }) =
 
     return (
         <div className="p-4 md:p-8 bg-gray-50 min-h-screen flex flex-col ">
-            <div className="sticky top-16 left-0 bg-white z-10 shadow-md">
+            <div className="bg-white z-10 shadow-md">
                 <div className="flex items-center p-4">
                     <button
                         onClick={() => decreaseFormStep(1)}
@@ -28,9 +28,9 @@ const LCDetails = ({ data, handleChange, increaseFormStep, decreaseFormStep }) =
                 </div>
             </div>
 
-            <div className="sticky top-[100px] left-0 flex flex-col md:flex-row mt-4">
+            <div className="flex flex-col md:flex-row mt-4">
                 <div className=" w-full md:w-1/4 mb-4 md:mr-8" data-aos="fade-right">
-                    <div className="sticky top-48 left-0">
+                    <div className="sticky top-0 left-0">
                         <h3 className="text-lg font-semibold mb-4">Steps</h3>
                         {/* Step indicators */}
                         <div className="mb-5">
@@ -168,8 +168,8 @@ const LCDetails = ({ data, handleChange, increaseFormStep, decreaseFormStep }) =
                                 <div className="mb-4">
                                     <label className="block text-gray-700 mb-2">Transferable</label>
                                     <select
-                                        name="lctransferable"
-                                        value={data.lctransferable}
+                                        name="transferable_lc"
+                                        value={data.transferable_lc}
                                         onChange={handleChange}
                                         className="border border-gray-300 rounded-lg p-3 w-full"
                                     >
@@ -302,13 +302,6 @@ const LCDetails = ({ data, handleChange, increaseFormStep, decreaseFormStep }) =
 
 LCDetails.propTypes = {
     data: PropTypes.shape({
-        LCdetailsPercentage: PropTypes.string,
-        LCdetailsIncoterms: PropTypes.string,
-        LCdetailsCurrency: PropTypes.string,
-        LCdetailsDeliveryTerm: PropTypes.string,
-        LCdetailsAmount: PropTypes.string,
-        LCdetailsNamePlaced: PropTypes.string,
-        LCdetailsTolerance: PropTypes.string,
         form_of_documentary_credit: PropTypes.string,
         date_of_issue: PropTypes.string,
         applicable_rules: PropTypes.string,
@@ -322,6 +315,7 @@ LCDetails.propTypes = {
         tolerance_negative: PropTypes.string,
         add_amount_covered: PropTypes.number,
         ref_to_pre_advice: PropTypes.string,
+        transferable_lc: PropTypes.string,
     }),
     handleChange: PropTypes.func,
     increaseFormStep: PropTypes.func,

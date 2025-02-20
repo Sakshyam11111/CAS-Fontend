@@ -32,13 +32,8 @@ const Form = () => {
     exim_code: "",
     pan_no: "",
 
-    LCdetailsPercentage: "",
-    LCdetailsIncoterms: "",
-    LCdetailsCurrency: "",
-    LCdetailsDeliveryTerm: "",
-    LCdetailsAmount: "",
-    LCdetailsNamePlaced: "",
-    LCdetailsTolerance: "",
+
+    
     form_of_documentary_credit: "",
     date_of_issue: "",
     applicable_rules: "",
@@ -52,6 +47,7 @@ const Form = () => {
     tolerance_negative: "",
     add_amount_covered: "",
     ref_to_pre_advice: "",
+    transferable_lc: "",
 
     credit_bank_name: "",
     credit_swift_code: "",

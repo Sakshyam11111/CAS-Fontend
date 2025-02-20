@@ -13,7 +13,7 @@ const Trans = ({ data, handleChange, increaseFormStep, decreaseFormStep }) => {
 
     return (
         <div className="p-4 md:p-8 bg-gray-50 min-h-screen flex flex-col">
-            <div className="sticky top-16 left-0 bg-white z-10 shadow-md">
+            <div className="bg-white z-10 shadow-md">
                 <div className="flex items-center p-4">
                     <button
                         onClick={() => decreaseFormStep(3)}
