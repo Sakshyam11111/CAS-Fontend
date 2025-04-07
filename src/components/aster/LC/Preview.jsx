@@ -3,17 +3,17 @@ import PropTypes from 'prop-types';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
 
-const Preview = ({ data, handleChange, decreaseFormStep }) => {
+const Preview = ({ data, handleChange, updateCurrent }) => {
     useEffect(() => {
         AOS.init({ duration: 1000 });
         AOS.refresh();
     }, []);
 
     return (
-        <div className="w-full md:w-3/4 mx-auto" data-aos="fade-left">
+        <div className="w-full mx-auto" data-aos="fade-left">
             <form className="bg-white p-6 rounded-lg shadow-md mt-10 mb-10">
                 {/* Applicant details */}
-                <div className="w-full md:w-3/4" data-aos="fade-left">
+                <div className="w-full" data-aos="fade-left">
                     <div className="p-6 bg-white rounded-lg shadow-md mt-6">
                         <h3 className='text-xl font-semibold mb-4 text-green-500 hover:underline hover:text-green-500 transition-all duration-200'>Applicant Details</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
@@ -238,8 +238,6 @@ const Preview = ({ data, handleChange, decreaseFormStep }) => {
                 </div>
 
                 <div className="p-6 bg-white rounded-lg shadow-md mt-6">
-                    <h3 className='text-xl font-semibold mb-4 text-green-500 hover:underline hover:text-green-500 transition-all duration-200'>LC Issuance</h3>
-                    <div className="p-6 bg-white rounded-lg shadow-md mt-6">
                         <h3 className='text-xl font-semibold mb-4 text-green-500 hover:underline hover:text-green-500 transition-all duration-200'>LC Issuance</h3>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                             {["Transferable", "Revolving", "Deferred", "Back to Back", "Red Letter", "Open Ended", "StandBy"].map((option, index) => (
@@ -257,7 +255,6 @@ const Preview = ({ data, handleChange, decreaseFormStep }) => {
                             ))}
                         </div>
                     </div>
-                </div>
 
                 {/* LC Details Section */}
                 <div className="p-6 bg-white rounded-lg shadow-md mt-6">
@@ -1178,16 +1175,11 @@ const Preview = ({ data, handleChange, decreaseFormStep }) => {
                     </div>
                 </div>
 
-
-
-
-
-
                 {/* Submit Button */}
                 <div className="flex justify-end mt-4">
                     <button
                         type="button"
-                        onClick={() => decreaseFormStep(5)}
+                        onClick={() => updateCurrent("Submit")}
                         className="bg-green-600 text-white rounded-lg px-8 py-3 hover:bg-green-700 transition duration-200"
                     >
                         Continue →
@@ -1305,7 +1297,7 @@ Preview.propTypes = {
         direct_reimbursement: PropTypes.string,
     }),
     handleChange: PropTypes.func,
-    decreaseFormStep: PropTypes.func,
+    updateCurrent: PropTypes.func,
 };
 
 export default Preview;

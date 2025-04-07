@@ -2,13 +2,20 @@ import { useEffect, useState } from "react";
 import Apply from "./Apply";
 import Bene from "./Bene";
 import LCDetails from "./LCdetails";
-import Tenure from "./Tenure";
-import Trans from "./Trans";
+import Description from "./Description";
+import Associated from "./Associated";
+import Credit from "./Credit";
 import Submit from "./Submit";
 import Preview from "./Preview";
-import Conform from "./Conform";
+import Sidebar from "./Sidebar";
 
 const Form = () => {
+  const [isActive, setIsActive] = useState("Apply");
+
+  const updateCurrent = (currentStep) => {
+    setIsActive(currentStep)
+  }
+
   const [data, setData] = useState({
     applicant_name: "",
     applicant_email: "",
@@ -33,7 +40,7 @@ const Form = () => {
     pan_no: "",
 
 
-    
+
     form_of_documentary_credit: "",
     date_of_issue: "",
     applicable_rules: "",
@@ -110,23 +117,13 @@ const Form = () => {
     direct_reimbursement: ""
   });
 
-  const [formStep, setFormStep] = useState(0);
-
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setData((prevState) => ({
-  //     ...prevState,
-  //     [name]: value,
-  //   }));
-  // };
-
   const handleChange = (event) => {
     const { name, value, type } = event.target;
 
     let updatedValue = value;
 
     if (type === "number") {
-      updatedValue = value ? Number(value) : value; // Convert to number or keep it empty
+      updatedValue = value ? Number(value) : value;
     }
 
     setData((prevState) => ({
@@ -138,14 +135,6 @@ const Form = () => {
   useEffect(() => {
     console.log("The data: ", data);
   }, [data]);
-
-  const increaseFormStep = (value) => {
-    setFormStep((prevStep) => prevStep + value);
-  };
-
-  const decreaseFormStep = (value) => {
-    setFormStep((prevStep) => prevStep - value);
-  };
 
 
   const handleSubmit = async () => {
@@ -167,71 +156,66 @@ const Form = () => {
   };
 
   return (
-    <div>
-      {formStep === 0 && (
-        <Apply
-          data={data}
-          handleChange={handleChange}
-          increaseFormStep={() => increaseFormStep(1)}
-        />
-      )}
-      {formStep === 1 && (
-        <Bene
-          data={data}
-          handleChange={handleChange}
-          increaseFormStep={() => increaseFormStep(1)}
-          decreaseFormStep={() => decreaseFormStep(1)}
-        />
-      )}
-      {formStep === 2 && (
-        <LCDetails
-          data={data}
-          handleChange={handleChange}
-          increaseFormStep={() => increaseFormStep(1)}
-          decreaseFormStep={() => decreaseFormStep(1)}
-        />
-      )}
-      {formStep === 3 && (
-        <Conform
-          data={data}
-          handleChange={handleChange}
-          increaseFormStep={() => increaseFormStep(1)}
-          decreaseFormStep={() => decreaseFormStep(1)}
-        />
-      )}
-      {formStep === 4 && (
-        <Trans
-          data={data}
-          handleChange={handleChange}
-          increaseFormStep={() => increaseFormStep(1)}
-          decreaseFormStep={() => decreaseFormStep(1)}
-        />
-      )}
-      {formStep === 5 && (
-        <Tenure
-          data={data}
-          handleChange={handleChange}
-          increaseFormStep={() => increaseFormStep(1)}
-          decreaseFormStep={() => decreaseFormStep(1)}
-        />
-      )}
-      {formStep === 6 && (
-        <Submit
-          data={data}
-          handleChange={handleChange}
-          increaseFormStep={() => increaseFormStep(1)}
-          decreaseFormStep={() => decreaseFormStep(1)}
-          handleSubmit={handleSubmit}
-        />
-      )}
-      {formStep === 7 && (
-        <Preview
-          data={data}
-          handleChange={handleChange}
-          increaseFormStep={() => increaseFormStep(1)}
-          decreaseFormStep={() => decreaseFormStep(1)}
-        />
-      )}
+    <div className="flex flex-col md:flex-row">
+      <Sidebar isActive={isActive} />
+      <div className="flex-grow">
+        {isActive == "Apply" && (
+          <Apply
+            data={data}
+            handleChange={handleChange}
+            updateCurrent={updateCurrent}
+          />
+        )}
+        {isActive == "Bene" && (
+          <Bene
+            data={data}
+            handleChange={handleChange}
+            updateCurrent={updateCurrent}
+          />
+        )}
+        {isActive == "LCDetails" && (
+          <LCDetails
+            data={data}
+            handleChange={handleChange}
+            updateCurrent={updateCurrent}
+          />
+        )}
+        {isActive == "Associated" && (
+          <Associated
+            data={data}
+            handleChange={handleChange}
+            updateCurrent={updateCurrent}
+          />
+        )}
+        {isActive == "Description" && (
+          <Description
+            data={data}
+            handleChange={handleChange}
+            updateCurrent={updateCurrent}
+          />
+        )}
+        {isActive == "Credit" && (
+          <Credit
+            data={data}
+            handleChange={handleChange}
+            updateCurrent={updateCurrent}
+          />
+        )}
+        {isActive == "Submit" && (
+          <Submit
+            data={data}
+            handleChange={handleChange}
+            updateCurrent={updateCurrent}
+          />
+        )}
+        {isActive == "Preview" && (
+          <Preview
+            data={data}
+            handleChange={handleChange}
+            updateCurrent={updateCurrent}
+          />
+        )}
+      </div>
     </div>
   );
 };

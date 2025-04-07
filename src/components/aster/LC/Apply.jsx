@@ -6,7 +6,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PropTypes from 'prop-types';
 
-const Apply = ({ data, handleChange, increaseFormStep }) => {
+const Apply = ({ data, handleChange, updateCurrent }) => {
     const [panNumber, setPanNumber] = useState('');
     const [panDetails, setPanDetails] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -53,7 +53,7 @@ const Apply = ({ data, handleChange, increaseFormStep }) => {
     };
 
     return (
-        <div className="p-4 md:p-8 bg-gray-50 min-h-screen flex flex-col">
+        <div className="p-4 md:p-8 bg-gray-50 flex flex-col">
             {loading ? (
                 <div className="flex justify-center items-center min-h-screen">
                     <div className="loader">Loading...</div>
@@ -77,62 +77,8 @@ const Apply = ({ data, handleChange, increaseFormStep }) => {
                     </div>
 
                     <div className="flex flex-grow mt-4 flex-col md:flex-row">
-                        <div className="hidden md:block w-1/4 mr-8">
-                            <div className='sticky top-0 left-0'>
-                                <h3 className="text-lg font-semibold mb-4">Steps</h3>
-                                <div className="mb-4">
-                                    <div className="flex items-center">
-                                        <div className="w-8 h-8 rounded-full bg-gray-800 text-white flex items-center justify-center">1</div>
-                                        <div className="ml-4 text-black text-lg">Applicant Details</div>
-                                    </div>
-                                    <div className="border-l-2 border-gray-300 h-10" />
-                                </div>
-                                <div className="mb-4">
-                                    <div className="flex items-center">
-                                        <div className="w-5 h-5 rounded-full bg-gray-600 flex items-center justify-center"></div>
-                                        <div className="ml-4 text-gray-800 text-lg">Name and Address</div>
-                                    </div>
-                                    <div className="border-l-2 border-gray-300 h-10" />
-                                </div>
-                                <div className="mb-4">
-                                    <div className="flex items-center">
-                                        <div className="w-5 h-5 rounded-full bg-gray-400 flex items-center justify-center"></div>
-                                        <div className="ml-4 text-gray-400 text-lg">Beneficiary Details</div>
-                                    </div>
-                                    <div className="border-l-2 border-gray-300 h-10" />
-                                </div>
-                                <div className="mb-4">
-                                    <div className="flex items-center">
-                                        <div className="w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center">2</div>
-                                        <div className="ml-4 text-black text-lg">LC Details</div>
-                                    </div>
-                                    <div className="border-l-2 border-gray-300 h-10" />
-                                </div>
-                                <div className="mb-4">
-                                    <div className="flex items-center">
-                                        <div className="w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center">3</div>
-                                        <div className="ml-4 text-black text-lg">Associated Parties</div>
-                                    </div>
-                                    <div className="border-l-2 border-gray-300 h-10" />
-                                </div>
-                                <div className="mb-4">
-                                    <div className="flex items-center">
-                                        <div className="w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center">4</div>
-                                        <div className="ml-4 text-black text-lg">Description</div>
-                                    </div>
-                                    <div className="border-l-2 border-gray-300 h-10" />
-                                </div>
-                                <div className="mb-4">
-                                    <div className="flex items-center">
-                                        <div className="w-8 h-8 rounded-full bg-gray-300 text-white flex items-center justify-center">5</div>
-                                        <div className="ml-4 text-black text-lg">Credit</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         {/* Applicant details */}
-                        <div className="w-full md:w-3/4" data-aos="fade-left">
+                        <div className="w-full" data-aos="fade-left">
                             <form className="bg-white p-6 rounded-lg shadow-md">
                                 <div className="p-6 bg-white rounded-lg shadow-md mt-6">
                                     <h3 className='text-xl font-semibold mb-4 text-green-500 hover:underline hover:text-green-500 transition-all duration-200'>
@@ -262,7 +208,7 @@ const Apply = ({ data, handleChange, increaseFormStep }) => {
 
                                     <button
                                         type="button"
-                                        onClick={() => increaseFormStep(1)}
+                                        onClick={() => updateCurrent("Bene")}
                                         className="bg-green-600 text-white rounded-lg px-8 py-3 hover:bg-green-700 transition duration-200"
                                     >
                                         Continue →
@@ -290,7 +236,7 @@ Apply.propTypes = {
         applicant_pan_no: PropTypes.string,
     }),
     handleChange: PropTypes.func,
-    increaseFormStep: PropTypes.func,
+    updateCurrent: PropTypes.func,
 };
 
 export default Apply;
