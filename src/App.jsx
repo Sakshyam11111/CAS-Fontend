@@ -1,3 +1,4 @@
+import "./App.css"
 import Access from "./components/access/Access"
 import Bank from "./components/bank/Bank"
 import Card from "./components/navbar/card/Card"
@@ -13,6 +14,8 @@ import Aster from "./components/aster/Aster"
 import LC from "./components/aster/LC/LC"
 import Form from "./components/aster/LC/Form"
 import Details from "./components/aster/LC/Details"
+import Chatbox from "./components/chatbox/chatbox"
+
 
 
 const App = () => {
@@ -37,7 +40,9 @@ const App = () => {
           <Route path="/details" element={<Details />} />
           <Route path="/form" element={<Form />} />
         </Routes>
+
       </Router>
+      <Chatbox />
     </>
   );
 };

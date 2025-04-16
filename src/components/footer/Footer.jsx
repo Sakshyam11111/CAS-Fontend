@@ -8,7 +8,7 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="bg-gray-50 py-8">
+        <footer className="bg-gray-50 py-8 pt-20"> 
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center px-4" data-aos="fade-up">
                 <div className="mb-6 md:mb-0">
                     <h1 className="text-3xl font-bold">Cas Bank</h1>
@@ -47,7 +47,6 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-
         </footer>
     );
 };
