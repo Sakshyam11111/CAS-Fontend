@@ -15,6 +15,9 @@ import LC from "./components/aster/LC/LC"
 import Form from "./components/aster/LC/Form"
 import Details from "./components/aster/LC/Details"
 import Chatbox from "./components/chatbox/chatbox"
+import Registeropening from "./components/navbar/openaccount/Registeropening"
+import Formregister from "./components/navbar/openaccount/Formregister"
+import Learnmore from "./components/navbar/openaccount/Learnmore"
 
 
 
@@ -39,6 +42,9 @@ const App = () => {
           <Route path="/lc" element={<LC />} />
           <Route path="/details" element={<Details />} />
           <Route path="/form" element={<Form />} />
+          <Route path="/registeropening" element={<Registeropening />} />
+          <Route path="/formregister" element={<Formregister />} />
+          <Route path="/learnmore" element={<Learnmore />} />
         </Routes>
 
       </Router>

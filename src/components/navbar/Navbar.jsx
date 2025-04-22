@@ -3,6 +3,7 @@ import { MdOutlineHome } from 'react-icons/md';
 import { FaSearch } from 'react-icons/fa';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -59,9 +60,9 @@ const Navbar = () => {
           </div>
 
           {/* Open Account Button */}
-          <button className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700">
+          <Link to="/registeropening" className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700">
             OPEN AN ACCOUNT
-          </button>
+          </Link>
 
           {/* Hamburger Menu for Mobile */}
           <button onClick={toggleMenu} aria-expanded={isMenuOpen} className="md:hidden text-gray-600 hover:text-green-600">
