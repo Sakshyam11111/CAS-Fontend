@@ -22,9 +22,9 @@ const Hero = () => {
           The harder you work for something, the greater<br /> you’ll feel when you achieve it.
         </p>
         <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
-          <Link to="#">
+          <Link to="aster">
             <button className="border border-transparent bg-green-600 text-white px-6 py-3 md:px-9 md:py-3 hover:bg-green-700 transition duration-200">
-              APPLY ONLINE
+              SERVICE ONLINE
             </button>
           </Link>
           <Link to="/loan-calculator">
