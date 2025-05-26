@@ -68,39 +68,42 @@ const Registeropening = () => {
         { title: 'CAS NRN Savings Account', description: 'CAS NRN Savings Account', image: Image8 },
     ];
 
-    const renderAccounts = useCallback((accountList) => (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
-            {accountList.map((account, index) => (
-                <div key={index} className="border p-4 rounded-lg flex items-start flex-col sm:flex-row hover:shadow-lg transition-shadow duration-200">
-                    <img src={account.image} alt={account.title} className="w-16 h-16 mb-2 sm:mb-0 sm:mr-4" />
-                    <div className="flex-1">
-                        <h3 className="font-bold text-xl">{account.title}</h3>
-                        <div className="flex items-center text-gray-500 text-sm mt-1">
-                            <FaCheck className="mr-1" />
-                            <p>{account.description}</p>
-                        </div>
-                        <div className="border-b border-gray-300 my-2"></div>
-                        <div className="flex flex-col sm:flex-row justify-between mt-4">
-                            <Link
-                                to="/registerform"
-                                className="bg-green-600 text-white px-8 py-2 rounded-3xl flex items-center hover:bg-green-700 transition duration-200"
-                                aria-label={`Apply for ${account.title}`}
-                            >
-                                <FaCheck className="mr-2" /> Apply
-                            </Link>
-                            <Link
-                                to="/learnmore"
-                                className="bg-green-600 text-white px-4 py-2 rounded-3xl flex items-center hover:bg-green-700 transition duration-200"
-                                aria-label={`Learn more about ${account.title}`}
-                            >
-                                <FaRegEye className="mr-2" /> Learn More
-                            </Link>
+    const renderAccounts = useCallback((accountList) => {
+
+        return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5">
+                {accountList.map((account, index) => (
+                    <div key={index} className="border p-4 rounded-lg flex items-start flex-col sm:flex-row hover:shadow-lg transition-shadow duration-200">
+                        <img src={account.image} alt={account.title} className="w-16 h-16 mb-2 sm:mb-0 sm:mr-4" />
+                        <div className="flex-1">
+                            <h3 className="font-bold text-xl">{account.title}</h3>
+                            <div className="flex items-center text-gray-500 text-sm mt-1">
+                                <FaCheck className="mr-1" />
+                                <p>{account.description}</p>
+                            </div>
+                            <div className="border-b border-gray-300 my-2"></div>
+                            <div className="flex flex-col sm:flex-row justify-between mt-4">
+                                <Link
+                                    to={`/registerform/${account.title.toLowerCase().replace(/ /g, '-')}`}
+                                    className="bg-green-600 text-white px-8 py-2 rounded-3xl flex items-center hover:bg-green-700 transition duration-200"
+                                    aria-label={`Apply for ${account.title}`}
+                                >
+                                    <FaCheck className="mr-2" /> Apply
+                                </Link>
+                                <Link
+                                    to="/learnmore"
+                                    className="bg-green-600 text-white px-4 py-2 rounded-3xl flex items-center hover:bg-green-700 transition duration-200"
+                                    aria-label={`Learn more about ${account.title}`}
+                                >
+                                    <FaRegEye className="mr-2" /> Learn More
+                                </Link>
+                            </div>
                         </div>
                     </div>
-                </div>
-            ))}
-        </div>
-    ), []);
+                ))}
+            </div>
+        )
+    }, []);
 
     const selectedAccounts = isAbroad
         ? hasNRNCard

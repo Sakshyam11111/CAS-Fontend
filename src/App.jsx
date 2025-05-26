@@ -43,7 +43,7 @@ const App = () => {
           <Route path="/form" element={<Form />} />
           <Route path="/registeropening" element={<Registeropening />} />
           <Route path="/learnmore" element={<Learnmore />} />
-          <Route path="/registerform" element={<ReForm />} />
+          <Route path="/registerform/:accountType" element={<ReForm />} />
         </Routes>
 
       </Router>

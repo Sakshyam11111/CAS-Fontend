@@ -1,31 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SlEnvolope, SlOptions } from "react-icons/sl";
 import { CiBank } from "react-icons/ci";
 import { GiReceiveMoney } from "react-icons/gi";
 import { FaTradeFederation } from "react-icons/fa";
 import { TbTransferVertical } from "react-icons/tb";
 import { IoDocumentTextOutline } from "react-icons/io5";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useNavigate } from 'react-router-dom';
 
 const Aster = () => {
-    const [selectedOption, setSelectedOption] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
         AOS.init({ duration: 1000 });
     }, []);
 
-    const handleCheckboxChange = (index) => {
-        setSelectedOption(index === selectedOption ? null : index);
-    };
-
-    const handleNextStep = () => {
-        if (selectedOption === 0) {
+    const handleOptionClick = (option) => {
+        if (option === 'LC') {
             navigate('/lc');
         }
+        // Other options can be handled here in the future
     };
 
     const handleBack = () => {
@@ -57,7 +53,7 @@ const Aster = () => {
                 <p className="mb-4 text-gray-400 text-base md:text-lg">We’re a full service portal to help you trade smart.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                     {[
-                        { icon: <SlEnvolope className="h-6 w-6" />, title: "LC", description: "Letter of credit" },
+                        { icon: <SlEnvolope className="h-6 w-6" />, title: "LC", description: "Letter of Credit" },
                         { icon: <CiBank className="h-6 w-6" />, title: "BG", description: "Bank Guarantee" },
                         { icon: <GiReceiveMoney className="h-6 w-6" />, title: "LF", description: "Loan Financing" },
                         { icon: <TbTransferVertical className="h-6 w-6" />, title: "SCF", description: "Supply Chain Financing" },
@@ -68,14 +64,8 @@ const Aster = () => {
                             key={index}
                             className="flex items-start p-6 bg-white border border-gray-300 rounded-3xl hover:bg-gray-200 transition duration-200 cursor-pointer"
                             data-aos="zoom-in"
-                            onClick={() => handleCheckboxChange(index)}
+                            onClick={() => handleOptionClick(item.title)}
                         >
-                            <input
-                                type="checkbox"
-                                checked={selectedOption === index}
-                                onChange={() => handleCheckboxChange(index)}
-                                className="mr-4 h-5 w-5 text-green-600 border-gray-300 rounded focus:ring-green-600 hover:border-green-600"
-                            />
                             <div className="flex flex-col items-start">
                                 <div className="border border-gray-300 rounded-full p-2 mb-2">
                                     {item.icon}
@@ -88,22 +78,14 @@ const Aster = () => {
                         </div>
                     ))}
                 </div>
-                <div className="flex flex-col md:flex-row justify-between">
+                <div className="flex justify-start">
                     <button 
-                        className="flex items-center mb-4 md:mb-0 px-4 py-2 border border-green-600 bg-white text-green-600 rounded hover:bg-gray-100 transition duration-200" 
+                        className="flex items-center px-4 py-2 border border-green-600 bg-white text-green-600 rounded hover:bg-gray-100 transition duration-200" 
                         data-aos="fade-up"
                         onClick={handleBack}  
                     >
                         <IoIosArrowBack className="h-4 w-4 mr-1" />
                         Go Back
-                    </button>
-                    <button
-                        className="flex items-center px-4 py-2 border border-green-600 bg-green-600 text-white rounded hover:bg-green-800 transition duration-200"
-                        data-aos="fade-up"
-                        onClick={handleNextStep}
-                    >
-                        Next Step
-                        <IoIosArrowForward className="h-4 w-4 ml-1" />
                     </button>
                 </div>
             </main>
