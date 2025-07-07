@@ -1,3 +1,16 @@
+# Bank Portal
+
+**[Live site](https://686bc2f3f7db23bb77135277--bankport.netlify.app/)**
+
+# Instructions
+
+```
+npm install
+npm run dev
+```
+
+
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
