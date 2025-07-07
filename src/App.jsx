@@ -14,11 +14,10 @@ import Aster from "./components/aster/Aster"
 import LC from "./components/aster/LC/LC"
 import Form from "./components/aster/LC/Form"
 import Details from "./components/aster/LC/Details"
-import Chatbox from "./components/chatbox/chatbox"
 import Registeropening from "./components/navbar/openaccount/Registeropening"
 import Learnmore from "./components/navbar/openaccount/Learnmore"
 import ReForm from "./components/navbar/openaccount/ReForm"
-
+import Chatbox from "./components/chatbox/Chatbox"
 
 const App = () => {
   return (
