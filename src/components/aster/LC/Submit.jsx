@@ -5,13 +5,21 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import PropTypes from 'prop-types';
 
-const Submit = ({ updateCurrent }) => {
+const Submit = ({ data, updateCurrent }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
         AOS.init({ duration: 1000 });
         AOS.refresh();
     }, []);
+
+    const handleSubmit = () => {
+        // Logic to submit the data (if needed)
+        console.log("Submitting data: ", data);
+
+        // Navigate to the LC page
+        navigate('/lc');
+    };
 
     return (
         <div className="p-4 md:p-8 bg-gray-50 flex flex-col">
@@ -44,10 +52,7 @@ const Submit = ({ updateCurrent }) => {
                             </button>
                             <button
                                 type="button"
-                                onClick={() => {
-                                    handleSubmit();
-                                    navigate('/lc');
-                                }}
+                                onClick={handleSubmit}
                                 className="bg-green-600 text-white rounded-lg px-4 py-2 hover:bg-green-700 transition duration-200"
                             >
                                 Submit →
@@ -59,7 +64,9 @@ const Submit = ({ updateCurrent }) => {
         </div>
     );
 };
+
 Submit.propTypes = {
+    data: PropTypes.object.isRequired,
     updateCurrent: PropTypes.func.isRequired,
 };
 

@@ -3,19 +3,48 @@ import { FaDollarSign, FaCreditCard, FaChartLine, FaHandHoldingUsd, FaClipboardL
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Award, Shield, Users } from 'lucide-react';
 
 const Create = () => {
   useEffect(() => {
-    AOS.init({ duration: 1000 }); 
+    AOS.init({ duration: 1000 });
   }, []);
 
   return (
     <div className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-5xl font-bold mb-4" data-aos="fade-up">Creating Extraordinary Customer Experience</h2>
-        <p className="text-gray-600 mb-10" data-aos="fade-up" data-aos-delay="200">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam bibendum erat morbi <br /> dignissim eu gravida consequat montes, sagittis.
+        <div className="flex items-center justify-center gap-2 mb-6">
+          <Award className="h-8 w-8 text-green-600" />
+          <span className="text-green-600 font-semibold text-lg">Award-Winning Services</span>
+        </div>
+
+        <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
+          Creating Extraordinary <br />
+          <span className="bg-gradient-to-r from-green-600 to-emerald-500 bg-clip-text text-transparent">
+            Customer Experience
+          </span>
+        </h2>
+
+        <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          Discover our comprehensive suite of financial services designed to empower your financial journey
+          with cutting-edge technology and personalized solutions.
         </p>
+
+        {/* Trust Indicators */}
+        <div className="flex flex-wrap justify-center gap-8 mb-12">
+          <div className="flex items-center gap-2">
+            <Users className="h-5 w-5 text-green-600" />
+            <span className="font-semibold">2.5+ Customers</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Shield className="h-5 w-5 text-blue-600" />
+            <span className="font-semibold">FDIC Insured</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Award className="h-5 w-5 text-purple-600" />
+            <span className="font-semibold">Best Digital Bank</span>
+          </div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {/* Trade Smart Icon */}

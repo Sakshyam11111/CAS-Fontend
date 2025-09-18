@@ -21,7 +21,6 @@ const Aster = () => {
         if (option === 'LC') {
             navigate('/lc');
         }
-        // Other options can be handled here in the future
     };
 
     const handleBack = () => {

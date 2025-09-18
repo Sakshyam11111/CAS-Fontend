@@ -1,300 +1,569 @@
-import { useEffect, useState } from 'react';
-import { CiSearch } from "react-icons/ci";
-import { IoIosArrowBack } from "react-icons/io";
-import { FaEye } from "react-icons/fa";
-import { IoMdExit, IoMdMore } from "react-icons/io";
-import { IoDocumentTextOutline } from "react-icons/io5";
+// LC.js
 import { useNavigate } from 'react-router-dom';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { TfiReload } from "react-icons/tfi";
+import { useEffect, useState } from 'react';
+import { 
+  Search, 
+  ArrowLeft, 
+  Eye, 
+  LogOut, 
+  MoreHorizontal, 
+  FileText, 
+  RefreshCw,
+  Download,
+  Upload,
+  Filter,
+  Calendar,
+  DollarSign,
+  TrendingUp,
+  AlertCircle,
+  CheckCircle,
+  Clock,
+  XCircle,
+  Bell,
+  Settings,
+  User,
+  FileCheck,
+  Send,
+  Paperclip
+} from 'lucide-react';
 
 const LC = () => {
-    const navigate = useNavigate();
-    const [showDocuments, setShowDocuments] = useState(true);
-    const [showHistory, setShowHistory] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const [showDocuments, setShowDocuments] = useState(true);
+  const [showHistory, setShowHistory] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedStatus, setSelectedStatus] = useState('all');
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedDateRange, setSelectedDateRange] = useState('all');
+  const [lcData, setLcData] = useState([]);
+  const [notifications, setNotifications] = useState(3);
+  const [activeTab, setActiveTab] = useState('Pending');
 
-    useEffect(() => {
-        AOS.init();
-    }, []);
+  // Sample data with more realistic LC information
+  const recentApplications = [
+    { 
+      id: 'LC626257', 
+      type: 'Import LC', 
+      status: 'Completed', 
+      amount: 'Rs125,000',
+      beneficiary: 'Global Exports Ltd',
+      expiryDate: '2024-12-15'
+    },
+    { 
+      id: 'LC626258', 
+      type: 'Export LC', 
+      status: 'Processing', 
+      amount: 'Rs89,500',
+      beneficiary: 'International Trade Co',
+      expiryDate: '2024-11-30'
+    },
+    { 
+      id: 'LC626259', 
+      type: 'Standby LC', 
+      status: 'Returned', 
+      amount: 'Rs250,000',
+      beneficiary: 'Construction Partners',
+      expiryDate: '2024-10-20'
+    },
+  ];
 
-    const recentApplications = [
-        { id: 'LC626257', type: 'Mortgage', status: 'Completed', amount: '$6,500' },
-        { id: 'LC626258', type: 'Personal loan', status: 'Approved', amount: '$6,500' },
-        { id: 'LC626259', type: 'Car loan', status: 'Rejected', amount: '$6,500' },
-    ];
+  const mockLcData = [
+    {
+      sn: 1,
+      applicant_name: 'Import LC - Electronics',
+      applicant_phone: 'LC-2024-001',
+      modified: '2024-09-15',
+      status: 'pending',
+      amount: 'Rs125,000',
+      beneficiary: 'Tech Suppliers Inc',
+      documents_required: 5,
+      documents_submitted: 3
+    },
+    {
+      sn: 2,
+      applicant_name: 'Export LC - Textiles',
+      applicant_phone: 'LC-2024-002',
+      modified: '2024-09-14',
+      status: 'processing',
+      amount: 'Rs89,500',
+      beneficiary: 'Fashion Global Ltd',
+      documents_required: 4,
+      documents_submitted: 4
+    },
+    {
+      sn: 3,
+      applicant_name: 'Standby LC - Construction',
+      applicant_phone: 'LC-2024-003',
+      modified: '2024-09-13',
+      status: 'completed',
+      amount: 'Rs250,000',
+      beneficiary: 'BuildTech Corp',
+      documents_required: 6,
+      documents_submitted: 6
+    },
+    {
+      sn: 4,
+      applicant_name: 'Import LC - Machinery',
+      applicant_phone: 'LC-2024-004',
+      modified: '2024-09-12',
+      status: 'returned',
+      amount: 'Rs175,000',
+      beneficiary: 'Industrial Solutions',
+      documents_required: 7,
+      documents_submitted: 5
+    }
+  ];
 
-    const timelineData = [
-        { message: "Bank returned the request.", date: "April 3, 2023, 7:37 AM", remarks: "REMARKS: PLEASE PROVIDE BC REPORT" },
-        { message: "You sent a message.", date: "April 3, 2023, 7:37 AM", remarks: "OK, I WILL SEND YOU NEW FILE" },
-        { message: "You sent a message.", date: "April 3, 2023, 7:26 AM", remarks: "SIGNED LC IS ATTACHED HERE" },
-        { message: "Bank accepted the request.", date: "April 2, 2023, 3:47 AM", remarks: "REMARKS: LC IS ACCEPTED" },
-        { message: "You sent a message.", date: "April 2, 2023, 3:47 AM", remarks: "" },
-    ];
+  useEffect(() => {
+    setLcData(mockLcData);
+  }, []);
 
-    const documents = [
-        { sn: 1, name: 'LC Form Decentralized-13', id: 'lc-686-349-10', date: 'Feb 6, 2024' },
-        { sn: 2, name: 'Personal loan', id: 'lc-686-349-11', date: 'Feb 6, 2024' },
-        { sn: 3, name: 'LC Form Decentralized-11', id: 'lc-686-349-11', date: 'Feb 6, 2024' },
-        { sn: 4, name: 'Mortgage loan', id: 'lc-686-349-11', date: 'Feb 6, 2024' },
-        { sn: 5, name: 'LC Form Decentralized-12', id: 'lc-686-349-11', date: 'Feb 6, 2024' },
-    ];
+  const timelineData = [
+    { 
+      message: "Document verification completed", 
+      date: "Sep 18, 2024, 2:15 PM", 
+      remarks: "All documents verified successfully",
+      type: "success"
+    },
+    { 
+      message: "Additional documents requested", 
+      date: "Sep 18, 2024, 10:30 AM", 
+      remarks: "Please provide updated financial statements",
+      type: "warning"
+    },
+    { 
+      message: "LC application submitted", 
+      date: "Sep 17, 2024, 4:45 PM", 
+      remarks: "Application received and under review",
+      type: "info"
+    },
+    { 
+      message: "Initial review completed", 
+      date: "Sep 16, 2024, 11:20 AM", 
+      remarks: "Preliminary checks passed",
+      type: "success"
+    },
+  ];
 
-    const filteredDocuments = documents.filter(doc =>
-        doc.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+  const getStatusIcon = (status) => {
+    switch (status) {
+      case 'completed': return <CheckCircle className="w-4 h-4 text-green-500" />;
+      case 'processing': return <Clock className="w-4 h-4 text-blue-500" />;
+      case 'pending': return <AlertCircle className="w-4 h-4 text-yellow-500" />;
+      case 'returned': return <XCircle className="w-4 h-4 text-red-500" />;
+      default: return <Clock className="w-4 h-4 text-gray-500" />;
+    }
+  };
 
-    const handleTabClick = (tab) => {
-        if (tab === "Pending") {
-            setShowDocuments(true);
-            setShowHistory(false);
-        } else if (tab === "History") {
-            setShowDocuments(false);
-            setShowHistory(true);
-        } else {
-            setShowDocuments(false);
-            setShowHistory(false);
-        }
-    };
+  const getStatusBadge = (status) => {
+    const baseClasses = "px-3 py-1 text-xs font-semibold rounded-full";
+    switch (status) {
+      case 'Completed':
+      case 'completed':
+        return `${baseClasses} bg-green-100 text-green-800`;
+      case 'Processing':
+      case 'processing':
+        return `${baseClasses} bg-blue-100 text-blue-800`;
+      case 'Pending':
+      case 'pending':
+        return `${baseClasses} bg-yellow-100 text-yellow-800`;
+      case 'Returned':
+      case 'returned':
+        return `${baseClasses} bg-red-100 text-red-800`;
+      default:
+        return `${baseClasses} bg-gray-100 text-gray-800`;
+    }
+  };
 
-    const refreshDocuments = () => {
-    };
+  const filteredDocuments = lcData.filter(doc => {
+    const matchesSearch = doc.applicant_name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = selectedStatus === 'all' || doc.status === selectedStatus;
+    return matchesSearch && matchesStatus;
+  });
 
-    const openDetailsPage = (doc) => {
-        navigate('/details', { state: { document: doc } });
-    };
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+    if (tab === "Pending") {
+      setShowDocuments(true);
+      setShowHistory(false);
+    } else if (tab === "History") {
+      setShowDocuments(false);
+      setShowHistory(true);
+    } else {
+      setShowDocuments(true);
+      setShowHistory(false);
+    }
+  };
 
-    const[lcData, setLcData] = useState([]);
+  const stats = [
+    { label: 'Total LCs', value: '24', icon: FileText, color: 'text-green-600', bg: 'bg-green-50' },
+    { label: 'Active', value: '8', icon: TrendingUp, color: 'text-green-700', bg: 'bg-green-100' },
+    { label: 'Pending', value: '5', icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-50' },
+    { label: 'Total Value', value: 'Rs 1.2 L', icon: DollarSign, color: 'text-green-600', bg: 'bg-green-50' }
+  ];
 
-    // Fetch LC data on component mount
-    useEffect(() => {
-        const fetchLCData = async () => {
-            const fetch_lc_url = `http://192.168.10.3:8001/api/resource/Letter of Credit?fields=["*"]&order_by=creation desc`;
-
-            try {
-                const response = await fetch(fetch_lc_url, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'f22c7e0d8ad50b0:5bb29f1008f8d7b',
-                        'Content-Type': 'application/json',
-                    }
-                });
-
-                const responseData = await response.json();
-   
-                setLcData(responseData.data)
-            } catch (err) {
-                console.log('Error: ', err);
-            }
-        };
-
-        fetchLCData();
-    },[]);
-
-    useEffect(() => {
-        console.log("The received lc data: ",lcData);
-    },[lcData])
-
-
-    return (
-        <div className="flex flex-col md:flex-row p-5 bg-gray-50" data-aos="fade-up">
-            <div className="w-full md:w-1/4 bg-white p-5 rounded-lg shadow-md border border-gray-300 mr-5 mb-5 md:mb-0" data-aos="fade-right">
-                <h2 className="text-xl font-semibold mb-2">Stephannie Waldeck</h2>
-                <p className="text-gray-600">Upd. Feb 5, 2024, 5:34 PM</p>
-                <div className="mb-4 p-4 border border-gray-300 rounded-lg bg-white">
-                    <div className="mb-2 flex justify-between items-center">
-                        <p className="text-gray-600">Email</p>
-                        <p className="font-semibold">stephanie27@gmail.com</p>
-                    </div>
-                    <hr className="border-gray-300 mb-2" />
-                    <div className="mb-2 flex justify-between items-center">
-                        <p className="text-gray-600">Phone</p>
-                        <p className="font-semibold">9861348348</p>
-                    </div>
-                    <hr className="border-gray-300 mb-2" />
-                    <div className="mb-2 flex justify-between items-center">
-                        <p className="text-gray-600">ID Number</p>
-                        <p className="font-semibold">684-898-90</p>
-                    </div>
-                </div>
-                <h3 className="text-lg font-semibold mb-2 flex items-center">
-                    Recent Applications <span className="ml-2 bg-gray-200 text-gray-600 rounded-full px-2">6</span>
-                </h3>
-                <div className="space-y-4">
-                    {recentApplications.map((app, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 border border-gray-300 rounded-lg shadow-md bg-white">
-                            <div className="flex flex-col">
-                                <span className="font-bold">{app.type}</span>
-                                <span className="text-gray-500">#{app.id}</span>
-                                <span className="text-gray-600 text-sm">{app.status} - {app.amount}</span>
-                            </div>
-                            <div className={`ml-4 px-2 py-1 text-xs font-semibold rounded ${app.status === 'Completed' ? 'bg-green-200 text-green-600' : app.status === 'Rejected' ? 'bg-red-200 text-red-600' : 'bg-blue-200 text-blue-600'}`}>
-                                {app.status}
-                            </div>
-                            <div className="ml-4 text-red-500 font-semibold">
-                                {app.type === 'Personal loan' ? 'AL' : app.type === 'Car loan' ? 'RL' : 'DL'}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200 px-6 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <button 
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              onClick={() => navigate('/aster')}
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Letter of Credit Management</h1>
+              <p className="text-sm text-gray-500">Manage your LC applications and documentation</p>
             </div>
-
-            <div className="w-full md:w-3/4 bg-white p-5 rounded-lg shadow-md border border-gray-300" data-aos="fade-left">
-                <div className="mb-4 flex flex-col items-start">
-                    <div className="border border-gray-300 rounded-full p-2 bg-gray-100 hover:bg-gray-200 transition duration-200 mb-2 cursor-pointer" onClick={() => navigate('/aster')}>
-                        <IoIosArrowBack className="text-gray-600" />
-                    </div>
-                    <div className="flex items-center justify-between w-full">
-                        <h2 className="text-2xl font-bold">Letter of Credit (LC)</h2>
-                        <div className="flex items-center space-x-2">
-                            <div className="border border-gray-300 rounded-full p-2 hover:bg-gray-300 transition duration-200" onClick={refreshDocuments}>
-                                <TfiReload className="text-black" />
-                            </div>
-                            <button className="flex items-center bg-green-600 text-white rounded-full px-3 py-1 hover:bg-green-700 transition duration-200 gap-2">
-                                Exit
-                                <IoMdExit className="mr-1" />
-                            </button>
-                            <div className="border border-gray-300 rounded-full p-2 hover:bg-gray-300 transition duration-200">
-                                <IoMdMore className="text-black" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex space-x-4 mt-2 flex-wrap">
-                    {["Pending", "Processing", "Returned", "Completed", "Drafts", "History"].map((tab, index) => (
-                        <button
-                            key={index}
-                            className={`text-lg font-semibold ${tab === "Pending" && showDocuments ? 'text-green-500 border-b-2 border-green-500' : 'text-gray-600'} hover:text-green-500`}
-                            onClick={() => handleTabClick(tab)}
-                        >
-                            {tab}
-                        </button>
-                    ))}
-                </div>
-
-                <div className="mt-4 flex items-center justify-between">
-                    <h3 className="text-2xl font-semibold">Documents</h3>
-                    <div className="flex items-center space-x-2">
-                        <div className="relative w-full md:w-96">
-                            <input
-                                type="text"
-                                placeholder="Search by document name"
-                                className="border border-gray-300 rounded-lg p-2 pr-10 w-full focus:outline-none focus:ring-2 focus:ring-black"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                            <CiSearch className="absolute right-3 top-3 text-gray-500" />
-                        </div>
-                        <button
-                            className="bg-green-600 text-white rounded-lg px-4 py-2 hover:bg-green-700 transition duration-200 flex items-center"
-                            onClick={() => navigate('/form')}
-                        >
-                            <IoDocumentTextOutline className="mr-1" />
-                            Apply
-                        </button>
-                    </div>
-                </div>
-
-                {showDocuments && (
-                    <table className="min-w-full border-collapse border border-gray-300 mt-4" data-aos="fade-up">
-                        <thead>
-                            <tr className="bg-gray-100">
-                                <th className="border border-gray-300 p-2">S.N.</th>
-                                <th className="border border-gray-300 p-2">Request Name</th>
-                                <th className="border border-gray-300 p-2">Request ID</th>
-                                <th className="border border-gray-300 p-2">Date</th>
-                                <th className="border border-gray-300 p-2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {lcData.map((doc, index) => (
-                                <tr key={index} className="hover:bg-gray-50">
-                                    <td className="border border-gray-300 p-2">{doc.sn}</td>
-                                    <td className="border border-gray-300 p-2">{doc.applicant_name}</td>
-                                    <td className="border border-gray-300 p-2">{doc.applicant_phone}</td>
-                                    <td className="border border-gray-300 p-2">{doc.modified}</td>
-                                    <td className="border border-gray-300 p-2 flex justify-center items-center">
-                                        <button
-                                            className="flex items-center bg-[#3C3F4D] text-white rounded p-2 hover:bg-[#2C2F3D] transition duration-200"
-                                            onClick={() => openDetailsPage(doc)} // Navigate to details page
-                                        >
-                                            <FaEye className="mr-1" />
-                                            Details
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                )}
-
-                {showHistory && (
-                    <div className="mt-5 p-4 border border-gray-300 rounded-lg bg-gray-100">
-                        <h2 className="text-xl font-bold mb-2">Timeline Information</h2>
-                        <div className="relative">
-                            <div className="flex flex-col justify-center mb-4 mt-4" data-aos="fade-up">
-                                <div className='relative w-full md:w-[50%] m-auto'>
-                                    <div className="absolute left-5 top-0 bottom-0 w-[2px] bg-gray-300"></div>
-                                    {timelineData.map((event, index) => (
-                                        <div key={index} className='flex items-start'>
-                                            <div className="w-4 h-4 bg-gray-600 rounded-full mt-2"></div>
-                                            <div className="ml-4">
-                                                <p className="font-semibold">{event.message}</p>
-                                                {event.remarks && <p className="text-gray-600">REMARKS: {event.remarks}</p>}
-                                                <p className="text-gray-500">{event.date}</p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                        <h2 className="text-xl font-bold mt-5 mb-2">Reply</h2>
-                        <div className="p-4 border border-gray-300 rounded-lg bg-white">
-                            <p className="text-2xl font-semibold text-black">Bank accepted the request</p>
-                            <p className="text-gray-500">April 3, 2023, 3:47 AM</p>
-                            <div className="mt-4">
-                                <textarea
-                                    placeholder="Reply to the comment..."
-                                    className="border border-gray-300 rounded-lg p-2 w-full h-20 resize-none"
-                                />
-                                <div className="mt-4">
-                                    <label className="text-2xl block text-gray-600 mb-3">File upload</label>
-                                    <div
-                                        className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer h-32"
-                                        onDragOver={(e) => e.preventDefault()}
-                                        onDrop={(e) => {
-                                            e.preventDefault();
-                                            const files = Array.from(e.dataTransfer.files);
-                                            console.log(files);
-                                        }}
-                                        onClick={() => document.getElementById('file-input').click()}
-                                    >
-                                        <input
-                                            type="file"
-                                            id="file-input"
-                                            className="hidden"
-                                            onChange={(e) => {
-                                                const files = Array.from(e.target.files);
-                                                console.log(files);
-                                            }}
-                                        />
-                                        <p className="text-gray-500">Drag n drop some files here, or click to select files</p>
-                                    </div>
-                                </div>
-                                <div className="flex justify-center mt-4">
-                                    <button className="bg-green-600 text-white rounded px-4 py-2 hover:bg-green-700 transition duration-200">
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <button className="relative p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <Bell className="w-5 h-5" />
+              {notifications > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                  {notifications}
+                </span>
+              )}
+            </button>
+            <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <Settings className="w-5 h-5" />
+            </button>
+            <button className="flex items-center space-x-2 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition-colors">
+              <LogOut className="w-4 h-4" />
+              <span>Exit</span>
+            </button>
+          </div>
         </div>
-    );
+      </div>
+
+      <div className="flex flex-col lg:flex-row p-6 gap-6">
+        {/* Left Sidebar */}
+        <div className="w-full lg:w-1/3 xl:w-1/4 space-y-6">
+          {/* User Profile Card */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-green-600 to-green-700 rounded-full flex items-center justify-center text-white font-semibold text-lg">
+                U
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-gray-900">User</h2>
+                <p className="text-sm text-gray-500">Updated: Feb 5, 2024, 5:34 PM</p>
+              </div>
+            </div>
+            
+            <div className="space-y-3">
+              <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                <span className="text-sm text-gray-600">Email</span>
+                <span className="text-sm font-medium text-gray-900">user@gmail.com</span>
+              </div>
+              <div className="flex justify-between items-center py-2 border-b border-gray-100">
+                <span className="text-sm text-gray-600">Phone</span>
+                <span className="text-sm font-medium text-gray-900">+977 981234567</span>
+              </div>
+              <div className="flex justify-between items-center py-2">
+                <span className="text-sm text-gray-600">Customer ID</span>
+                <span className="text-sm font-medium text-gray-900">684-898-90</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-2 gap-4">
+            {stats.map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <div key={index} className="bg-white rounded-lg shadow-sm border border-gray-200 p-4">
+                  <div className={`w-8 h-8 ${stat.bg} rounded-lg flex items-center justify-center mb-2`}>
+                    <Icon className={`w-4 h-4 ${stat.color}`} />
+                  </div>
+                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-xs text-gray-500">{stat.label}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Recent Applications */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">Recent Applications</h3>
+              <span className="bg-blue-100 text-blue-800 text-xs font-medium px-2 py-1 rounded-full">
+                {recentApplications.length}
+              </span>
+            </div>
+            
+            <div className="space-y-3">
+              {recentApplications.map((app, index) => (
+                <div key={index} className="p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-900">{app.type}</p>
+                      <p className="text-sm text-gray-500">#{app.id}</p>
+                      <p className="text-sm text-gray-600 mt-1">{app.beneficiary}</p>
+                    </div>
+                    <span className={getStatusBadge(app.status)}>
+                      {app.status}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="font-semibold text-gray-900">{app.amount}</span>
+                    <span className="text-gray-500">Exp: {app.expiryDate}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="flex-1">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200">
+            {/* Tab Navigation */}
+            <div className="border-b border-gray-200 px-6 py-4">
+              <div className="flex flex-wrap gap-6">
+                {["Pending", "Processing", "Returned", "Completed", "Drafts", "History"].map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => handleTabClick(tab)}
+                    className={`relative py-2 font-medium transition-colors ${
+                      activeTab === tab
+                        ? 'text-green-700 border-b-2 border-green-700'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Content Header */}
+            <div className="px-6 py-4 border-b border-gray-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <h2 className="text-xl font-semibold text-gray-900">
+                  {showHistory ? 'Application Timeline' : 'LC Documents'}
+                </h2>
+                
+                <div className="flex items-center space-x-3">
+                  {/* Search */}
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Search documents..."
+                      className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                  </div>
+
+                  {/* Filters */}
+                  <div className="relative">
+                    <button
+                      onClick={() => setShowFilters(!showFilters)}
+                      className="flex items-center space-x-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <Filter className="w-4 h-4" />
+                      <span>Filter</span>
+                    </button>
+                    
+                    {showFilters && (
+                      <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-10 p-4">
+                        <div className="space-y-4">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                            <select
+                              value={selectedStatus}
+                              onChange={(e) => setSelectedStatus(e.target.value)}
+                              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
+                            >
+                              <option value="all">All Statuses</option>
+                              <option value="pending">Pending</option>
+                              <option value="processing">Processing</option>
+                              <option value="completed">Completed</option>
+                              <option value="returned">Returned</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+                            <select
+                              value={selectedDateRange}
+                              onChange={(e) => setSelectedDateRange(e.target.value)}
+                              className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500"
+                            >
+                              <option value="all">All Dates</option>
+                              <option value="today">Today</option>
+                              <option value="week">This Week</option>
+                              <option value="month">This Month</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    <Download className="w-4 h-4" />
+                    <span>Export</span>
+                  </button>
+
+                  <button 
+                    className="flex items-center space-x-2 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors"
+                    onClick={() => navigate('/form')}
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>New LC</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Content Body */}
+            <div className="p-6">
+              {showDocuments && (
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-3 px-4 font-semibold text-gray-900">S.N.</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-900">LC Type</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-900">Reference</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-900">Amount</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-900">Status</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-900">Progress</th>
+                        <th className="text-left py-3 px-4 font-semibold text-gray-900">Date</th>
+                        <th className="text-center py-3 px-4 font-semibold text-gray-900">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredDocuments.map((doc, index) => (
+                        <tr key={index} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                          <td className="py-4 px-4 text-gray-900">{doc.sn}</td>
+                          <td className="py-4 px-4">
+                            <div>
+                              <p className="font-medium text-gray-900">{doc.applicant_name}</p>
+                              <p className="text-sm text-gray-500">{doc.beneficiary}</p>
+                            </div>
+                          </td>
+                          <td className="py-4 px-4 font-mono text-sm text-gray-600">{doc.applicant_phone}</td>
+                          <td className="py-4 px-4 font-semibold text-gray-900">{doc.amount}</td>
+                          <td className="py-4 px-4">
+                            <span className={getStatusBadge(doc.status)}>
+                              {doc.status.charAt(0).toUpperCase() + doc.status.slice(1)}
+                            </span>
+                          </td>
+                          <td className="py-4 px-4">
+                            <div className="flex items-center space-x-2">
+                              <div className="w-16 bg-gray-200 rounded-full h-2">
+                                <div 
+                                  className="bg-green-600 h-2 rounded-full" 
+                                  style={{ width: `${(doc.documents_submitted / doc.documents_required) * 100}%` }}
+                                ></div>
+                              </div>
+                              <span className="text-xs text-gray-500">
+                                {doc.documents_submitted}/{doc.documents_required}
+                              </span>
+                            </div>
+                          </td>
+                          <td className="py-4 px-4 text-gray-600">{doc.modified}</td>
+                          <td className="py-4 px-4">
+                            <div className="flex items-center justify-center space-x-2">
+                              <button 
+                                className="p-2 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                                onClick={() => navigate('/details', { state: { document: doc } })}
+                              >
+                                <Eye className="w-4 h-4" />
+                              </button>
+                              <button className="p-2 text-gray-500 hover:text-green-600 hover:bg-green-50 rounded-lg transition-colors">
+                                <Download className="w-4 h-4" />
+                              </button>
+                              <button className="p-2 text-gray-500 hover:text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                                <MoreHorizontal className="w-4 h-4" />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {showHistory && (
+                <div className="space-y-6">
+                  {/* Timeline */}
+                  <div className="relative">
+                    <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                    
+                    {timelineData.map((event, index) => (
+                      <div key={index} className="relative flex items-start space-x-4 pb-8">
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                          event.type === 'success' ? 'bg-green-100' : 
+                          event.type === 'warning' ? 'bg-yellow-100' : 'bg-green-50'
+                        }`}>
+                          {event.type === 'success' ? <CheckCircle className="w-5 h-5 text-green-600" /> :
+                           event.type === 'warning' ? <AlertCircle className="w-5 h-5 text-yellow-600" /> :
+                           <Clock className="w-5 h-5 text-green-600" />}
+                        </div>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+                            <p className="font-medium text-gray-900">{event.message}</p>
+                            <p className="text-sm text-gray-600 mt-1">{event.remarks}</p>
+                            <p className="text-xs text-gray-500 mt-2">{event.date}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Reply Section */}
+                  <div className="bg-gray-50 rounded-lg p-6">
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Add Response</h3>
+                    
+                    <div className="space-y-4">
+                      <textarea
+                        placeholder="Type your response here..."
+                        className="w-full border border-gray-300 rounded-lg p-3 h-24 resize-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                      />
+                      
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Attach Files
+                        </label>
+                        <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-green-400 transition-colors">
+                          <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                          <p className="text-sm text-gray-600">
+                            Drag and drop files here, or <button className="text-green-600 hover:underline">browse</button>
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">Support: PDF, JPG, PNG (Max 10MB)</p>
+                        </div>
+                      </div>
+                      
+                      <div className="flex justify-end space-x-3">
+                        <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                          Cancel
+                        </button>
+                        <button className="flex items-center space-x-2 px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800 transition-colors">
+                          <Send className="w-4 h-4" />
+                          <span>Submit Response</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default LC;

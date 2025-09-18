@@ -137,23 +137,23 @@ const Form = () => {
   }, [data]);
 
 
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch(`http://192.168.10.3:8001/api/resource/Letter of Credit`, {
-        method: 'POST',
-        headers: {
-          'Authorization': 'f22c7e0d8ad50b0:5bb29f1008f8d7b',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
+  // const handleSubmit = async () => {
+  //   try {
+  //     const response = await fetch(`http://192.168.10.3:8001/api/resource/Letter of Credit`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Authorization': 'f22c7e0d8ad50b0:5bb29f1008f8d7b',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
 
-      const responseData = await response.json();
-      console.log(responseData);
-    } catch (err) {
-      console.log('Error: ', err);
-    }
-  };
+  //     const responseData = await response.json();
+  //     console.log(responseData);
+  //   } catch (err) {
+  //     console.log('Error: ', err);
+  //   }
+  // };
 
   return (
     <div className="flex flex-col md:flex-row">
