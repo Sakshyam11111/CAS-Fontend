@@ -30,7 +30,7 @@ const Hero = () => {
   const stats = [
     { number: '2.5M+', label: 'Happy Customers', icon: Users },
     { number: '99.9%', label: 'Uptime', icon: Shield },
-    { number: '$50B+', label: 'Assets Managed', icon: TrendingUp },
+    { number: 'Rs50B+', label: 'Assets Managed', icon: TrendingUp },
     { number: '4.9/5', label: 'Customer Rating', icon: Star }
   ];
 
