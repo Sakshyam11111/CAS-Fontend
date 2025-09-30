@@ -1,6 +1,6 @@
 # Bank Portal
 
-**[Live site](https://686bc2f3f7db23bb77135277--bankport.netlify.app/)**
+**[Live site](https://bankport.netlify.app/)**
 
 # Instructions
 
