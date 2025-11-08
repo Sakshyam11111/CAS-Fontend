@@ -2,6 +2,8 @@
 
 **[Live site](https://bankport.netlify.app/)**
 
+**[Figma site](https://www.figma.com/design/D1pJpGDP7YTESDYiVh4f7h/Banking-portal?node-id=0-1&p=f&t=4jA2sFxKYaoVkPdN-0)**
+
 # Instructions
 
 ```
